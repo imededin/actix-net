@@ -19,6 +19,11 @@ allowed_external_types = [
     "tokio::*",
 ]
 
+[lib]
+
+	name = "actix_rt"
+	path = "src/lib.rs"
+
 [features]
 default = ["macros"]
 macros = ["actix-macros"]

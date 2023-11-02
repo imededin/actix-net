@@ -206,3 +206,6 @@ where
 {
     tokio::task::spawn_local(f)
 }
+
+#[ cfg( feature = "wasm" ) ] mod wasm;
+#[ cfg( feature = "wasm" ) ] pub use wasm::*;
