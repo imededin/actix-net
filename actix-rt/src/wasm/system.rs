@@ -233,7 +233,7 @@ impl SystemRunner {
     /// driving the system, and blocking tasks could delay other tasks in the run loop.
     ///
     /// [`Runtime`]: crate::Runtime
-    pub fn runtime(&self) -> &crate::runtime::Runtime {
+    pub fn runtime(&self) -> &crate::wasm::runtime::Runtime {
         &self.rt
     }
 
