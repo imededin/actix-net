@@ -38,7 +38,7 @@ impl System {
     #[allow(clippy::new_ret_no_self)]
     pub fn new() -> SystemRunner {
         Self::with_tokio_rt(|| {
-            crate::runtime::default_tokio_runtime()
+            crate::wasm::runtime::default_tokio_runtime()
                 .expect("Default Actix (Tokio) runtime could not be created.")
         })
     }
@@ -53,7 +53,7 @@ impl System {
         let (stop_tx, stop_rx) = oneshot::channel();
         let (sys_tx, sys_rx) = mpsc::unbounded_channel();
 
-        let rt = crate::runtime::Runtime::from(runtime_factory());
+        let rt = crate::wasm::runtime::Runtime::from(runtime_factory());
         let sys_arbiter = rt.block_on(async { Arbiter::in_new_system() });
         let system = System::construct(sys_tx, sys_arbiter.clone());
 
@@ -175,7 +175,7 @@ impl System {
 #[must_use = "A SystemRunner does nothing unless `run` is called."]
 #[derive(Debug)]
 pub struct SystemRunner {
-    rt: crate::runtime::Runtime,
+    rt: crate::wasm::runtime::Runtime,
     stop_rx: oneshot::Receiver<i32>,
 }
 
