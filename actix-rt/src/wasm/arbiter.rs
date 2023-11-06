@@ -11,7 +11,7 @@ use std::{
 use futures_core::ready;
 use tokio::sync::mpsc;
 
-use crate::system::{System, SystemCommand};
+use crate::wasm::system::{System, SystemCommand};
 
 pub(crate) static COUNT: AtomicUsize = AtomicUsize::new(0);
 
