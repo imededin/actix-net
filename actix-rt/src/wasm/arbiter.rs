@@ -99,7 +99,7 @@ impl Arbiter {
     #[allow(clippy::new_without_default)]
     pub fn new() -> Arbiter {
         Self::with_tokio_rt(|| {
-            crate::runtime::default_tokio_runtime().expect("Cannot create new Arbiter's Runtime.")
+            crate::wasm::runtime::default_tokio_runtime().expect("Cannot create new Arbiter's Runtime.")
         })
     }
 
@@ -125,7 +125,7 @@ impl Arbiter {
             .spawn({
                 let tx = tx.clone();
                 move || {
-                    let rt = crate::runtime::Runtime::from(runtime_factory());
+                    let rt = crate::wasm::runtime::Runtime::from(runtime_factory());
                     let hnd = ArbiterHandle::new(tx);
 
                     System::set_current(sys);
